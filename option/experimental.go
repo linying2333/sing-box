@@ -51,4 +51,13 @@ type V2RayStatsServiceOptions struct {
 	Inbounds  []string `json:"inbounds,omitempty"`
 	Outbounds []string `json:"outbounds,omitempty"`
 	Users     []string `json:"users,omitempty"`
+	Store     *StatsStoreOptions  `json:"store,omitempty"` // 新增：持久化配置
+}
+
+// 新增: V2RayAPI.Stats.Store 统计持久化存储选项
+type StatsStoreOptions struct {
+	Enabled          bool                `json:"enabled,omitempty"`   // 是否启用持久化
+	Path             string              `json:"path,omitempty"`      // 数据库路径，默认 "stats.db"
+	V2RayAPIStatsID  string              `json:"stats_id,omitempty"`   // 多实例隔离标识 (与cache_id一致)
+	Interval         badoption.Duration  `json:"interval,omitempty"`  // 数据库同步间隔，默认 30秒 (数据无更新则不执行同步操作)
 }

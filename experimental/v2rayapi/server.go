@@ -68,6 +68,9 @@ func (s *Server) Start(stage adapter.StartStage) error {
 }
 
 func (s *Server) Close() error {
+	if s.statsService != nil {
+		_ = s.statsService.Close()
+	}
 	if s.grpcServer != nil {
 		s.grpcServer.Stop()
 	}
